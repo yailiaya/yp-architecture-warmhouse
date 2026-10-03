@@ -1,9 +1,4 @@
--- Create the database if it doesn't exist
-CREATE DATABASE smarthome;
-
--- Connect to the database
-\c smarthome;
-
+-- Tables and schemas are created in the smarthome database (created by POSTGRES_DB env var)
 -- Create the sensors table
 CREATE TABLE IF NOT EXISTS sensors (
     id SERIAL PRIMARY KEY,
