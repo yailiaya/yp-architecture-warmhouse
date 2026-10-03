@@ -52,6 +52,34 @@ entity "Telemetry" as telemetry_record {
   total: decimal
 }
 
+entity "Parameter" as parameter {
+  *id:              int <*>
+  parameter_type:   int
+  value:            varchar
+}
+
+entity "Action" as action {
+  *id: int <*>
+  name: varchar
+  parameter: int
+}
+
+entity "Expression" as expression {
+  *id: int <*>
+  device_id: int
+  condition_id: int
+  parameter_id: int
+  parameter_value: varchar
+}
+
+entity "Condition" as condition {
+  *id: int <*>
+  name: varchar
+  parameter_id: int
+  condition_type: int
+  value: varchar
+}
+
 ' Relations
 user ||--o{ home : "создаёт"
 user ||--o{ device : "создаёт"
@@ -60,5 +88,10 @@ device ||--|| device_type : "является"
 device ||--|| device_model : "является"
 device ||--o{ device_status : "является"
 device ||--o{ telemetry_record : "логгирует"
+device ||--|| device_configuration : "содержит"
+device_configuration ||--o{ action : "управляет"
+action ||--o{ parameter : "принадлежит"
+device ||--o{ expression : "ссылается"
+expression ||--o{ condition : "ссылается"
 
 @enduml
