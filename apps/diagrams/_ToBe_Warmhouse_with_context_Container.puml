@@ -1,0 +1,54 @@
+@startuml
+title FitLife Container Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "A user of Warmhouse system")
+Person(admin, "Administrator", "An administrator managing the system")
+System(WarmhouseSystem, "Warmhouse System", "System managing memberships, schedules, and payments")
+
+Container_Boundary(WarmhouseSystem, "Warmhouse System") {
+  Container(WebFrontApp, "Web Front Application", "Vue, JavaScript", "Web interface")
+  Container(LoadBalancer, "Load Balancer", "Nginx", "Load Balancer")
+  Container(WebApp, "Web Application", ".Net", "Handles user interactions")
+
+  Container(UserManagementService, "User Management Service", ".Net + PostgreSQL DB", "Manage User")
+  Container(PaymentService, "Payment Service", ".Net + PostgreSQL DB", "Processes payments")
+
+  Container(DeviceManagementService, "Device Management Service", ".Net", "Manage equipment items")
+  Container(DeviceConfigurationService, "Device Configuration Service", ".Net", "Configure device")
+  Container(DeviceCommandService, "Device Command Service", ".Net", "Process devices by sending commands")
+
+  Container(TelemetryService, "Telemetry Service", ".Net", "Store telemetry data")
+  Container(StoreService, "ELK", "Elasticsearch + Logstash + Kibana", "Store and index logs and telemetry")
+
+  Container(ReportingService, "Reporting Service", ".Net", "Provides logs and telemetry as a report")
+}
+
+System_Ext(payment_api, "Payment System API", "External API for payment integration")
+System_Ext(device, "Equipment", "Remote equipment on a user site")
+
+Rel(user, WebFrontApp, "Uses the system")
+Rel(admin, WebFrontApp,"Manages the system")
+Rel(WebFrontApp, LoadBalancer,"Balance load")
+Rel(LoadBalancer, WebApp,"Manage requests", "HTTPS/JSON")
+Rel(WebApp,UserManagementService,"Authorization and user management")
+Rel(WebApp,DeviceManagementService,"Read/Writes data")
+Rel(WebApp,DeviceConfigurationService,"Read/Writes data")
+Rel(WebApp,DeviceCommandService,"Send commands")
+Rel(WebApp,ReportingService,"Read data")
+
+Rel(TelemetryService,StoreService,"Read/Writes data")
+Rel(ReportingService,StoreService,"Read/Writes data")
+
+Rel(TelemetryService,device,"Writes data")
+
+Rel(DeviceManagementService,device,"Manage equipment")
+Rel(DeviceConfigurationService,device,"Configures equipment")
+Rel(DeviceCommandService,device,"Sends command")
+
+Rel(WebApp,PaymentService,"Processes payment requests")
+Rel(PaymentService,payment_api,"Processes payments")
+@enduml

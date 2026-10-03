@@ -1,0 +1,28 @@
+@startuml
+title Warmhouse Device Command Component Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(DeviceCommandService, "Device Command Service") {
+  Component(API, "API", ".Net Web API")
+
+  Component(CommandValidator, "Command Validator", ".Net", "Validate commands before send")
+  Component(DeviceStatusChecker, "Device Status Checker", ".Net", "Check device status, active, inactive, unresponsive")
+  Component(CommandManagementService, "Command Device Management", ".Net + Kafka", "Sends command to external device")
+  Component(CommandStatusHandling, "Command Status Handling", ".Net", "Handle command status changing")
+  Component(CommandLogging, "Command Logging", ".Net", "Logs command result and status into log system")
+}
+
+System_Ext(Device, "Device", "Standart protocol", "External device on user site")
+
+Rel(API,CommandValidator,"Validate command")
+Rel(CommandValidator,DeviceStatusChecker,"Check device status")
+Rel(DeviceStatusChecker,CommandManagementService,"Send command to MQ")
+
+Rel(CommandManagementService,Device,"Send command to external device")
+Rel(CommandManagementService,CommandStatusHandling,"Logs command status change")
+Rel(CommandStatusHandling,CommandLogging,"Logs command status change")
+
+@enduml
