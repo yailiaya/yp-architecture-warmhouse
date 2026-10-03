@@ -1,0 +1,64 @@
+@startuml
+
+' Entities
+entity "User" as user {
+  *id: int <*>
+  name: varchar
+  email: varchar
+  phone: varchar
+}
+
+entity "Home" as home {
+  *id: int <*>
+  adress: varchar
+  zipcode: int
+  total: decimal
+}
+
+entity "Device" as device {
+  *id: int <*>
+  serialnumber: varchar
+  location: varchar
+  type: int
+}
+
+entity "DeviceType" as device_type {
+  *id: int <*>
+  descrtption: varchar
+}
+
+entity "Device Model" as device_model {
+  *id: int <*>
+  type: int
+  specs: varchar
+}
+
+entity "Device Status" as device_status {
+  *id: int <*>
+  device: int
+  status: int
+  description: varchar
+}
+
+entity "Device Configuration" as device_configuration {
+  *id: int <*>
+  device: int
+  description: varchar
+}
+
+entity "Telemetry" as telemetry_record {
+  *id: int <*>
+  date: date
+  total: decimal
+}
+
+' Relations
+user ||--o{ home : "создаёт"
+user ||--o{ device : "создаёт"
+home ||--|| device : "принадлежит"
+device ||--|| device_type : "является"
+device ||--|| device_model : "является"
+device ||--o{ device_status : "является"
+device ||--o{ telemetry_record : "логгирует"
+
+@enduml
