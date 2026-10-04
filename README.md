@@ -91,31 +91,20 @@ To Be
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-Добавьте сюда диаграмму контекста в модели C4.
-
-Чтобы добавить ссылку в файл Readme.md, нужно использовать синтаксис Markdown. Это делают так:
-
-```markdown
-[Текст ссылки](URL)
-```
-
-Замените `Текст ссылки` текстом, который хотите использовать для ссылки. Вместо `URL` вставьте адрес, на который должна вести ссылка. Например:
-
-```markdown
-[Посетите Яндекс](https://ya.ru/)
-```
+[Warmhouse To Be C4 Context Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Context.puml)
 
 # Задание 2. Проектирование микросервисной архитектуры
 
-В этом задании вам нужно предоставить только диаграммы в модели C4. Мы не просим вас отдельно описывать получившиеся микросервисы и то, как вы определили взаимодействия между компонентами To-Be системы. Если вы правильно подготовите диаграммы C4, они и так это покажут.
-
 **Диаграмма контейнеров (Containers)**
 
-Добавьте диаграмму.
+[Warmhouse C4 Container Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Container.puml)
 
 **Диаграмма компонентов (Components)**
 
-Добавьте диаграмму для каждого из выделенных микросервисов.
+[Warmhouse Device Command Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_DeviceCommandService_Component.puml)
+[Warmhouse Payment Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_PaymentService_Component.puml)
+[Warmhouse Reporting Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ReportingService_Component.puml)
+[Warmhouse Telemetry Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_TelemetryService_Component.puml)
 
 **Диаграмма кода (Code)**
 
@@ -123,13 +112,16 @@ To Be
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+[ER-диаграмма.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ER.puml)
 
 # Задание 4. Создание и документирование API
 
 ### 1. Тип API
 
-Укажите, какой тип API вы будете использовать для взаимодействия микросервисов. Объясните своё решение.
+Для взаимодействия микросервисов используется синхронный REST API.
+Синхронный режим подходит в большинстве случаев так как базы данных развернуты внутри экосистемы Warmhouse.
+В остальных случаях, таких как телеметрия, оплата и отправка команд на устройства будут выполняться асинхронно вследствии того что это внешние системы
+с непредсказуемым временем реакции которую мы не контролируем. 
 
 ### 2. Документация API
 
