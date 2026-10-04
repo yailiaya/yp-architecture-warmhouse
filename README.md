@@ -91,20 +91,24 @@ To Be
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-[Warmhouse To Be C4 Context Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Context.puml)
+[Warmhouse To Be C4 Context Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Context.puml)
 
 # Задание 2. Проектирование микросервисной архитектуры
 
 **Диаграмма контейнеров (Containers)**
 
-[Warmhouse C4 Container Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Container.puml)
+[Warmhouse C4 Container Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_Container.puml)
 
 **Диаграмма компонентов (Components)**
 
-[Warmhouse Device Command Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_DeviceCommandService_Component.puml)
-[Warmhouse Payment Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_PaymentService_Component.puml)
-[Warmhouse Reporting Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ReportingService_Component.puml)
-[Warmhouse Telemetry Service Component Diagram -](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_TelemetryService_Component.puml)
+[Warmhouse Device Command Service Component Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_DeviceCommandService_Component.puml)
+
+[Warmhouse Payment Service Component Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_PaymentService_Component.puml)
+
+[Warmhouse Reporting Service Component Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ReportingService_Component.puml)
+
+[Warmhouse Telemetry Service Component Diagram.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_TelemetryService_Component.puml)
+
 
 **Диаграмма кода (Code)**
 
@@ -112,7 +116,7 @@ To Be
 
 # Задание 3. Разработка ER-диаграммы
 
-[ER-диаграмма.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ER.puml)
+[Warmhouse ER-диаграмма.](https://github.com/yailiaya/yp-architecture-warmhouse/blob/warmhouse/apps/diagrams/ToBe_Warmhouse_ER.puml)
 
 # Задание 4. Создание и документирование API
 
