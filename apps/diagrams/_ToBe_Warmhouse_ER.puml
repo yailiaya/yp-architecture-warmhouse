@@ -10,6 +10,7 @@ entity "User" as user {
 
 entity "Home" as home {
   *id: int <*>
+  user_id: int
   adress: varchar
   zipcode: int
   total: decimal
@@ -17,6 +18,8 @@ entity "Home" as home {
 
 entity "Device" as device {
   *id: int <*>
+  home_id: int
+  devicetype_id: int
   serialnumber: varchar
   location: varchar
   type: int
@@ -30,7 +33,7 @@ entity "DeviceType" as device_type {
 
 entity "Device Model" as device_model {
   *id: int <*>
-  type: int
+  devicetype_id: int
   specs: varchar
 }
 
@@ -39,16 +42,11 @@ entity "Device Status" as device_status {
   description: varchar
 }
 
-entity "Device Configuration" as device_configuration {
-  *id: int <*>
-  device: int
-  description: varchar
-}
-
 entity "Telemetry" as telemetry_record {
   *id: int <*>
+  device_id: int
   date: date
-  total: decimal
+  data: string
 }
 
 entity "Parameter" as parameter {
