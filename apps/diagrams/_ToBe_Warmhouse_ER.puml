@@ -20,6 +20,7 @@ entity "Device" as device {
   serialnumber: varchar
   location: varchar
   type: int
+  status: int
 }
 
 entity "DeviceType" as device_type {
@@ -35,8 +36,6 @@ entity "Device Model" as device_model {
 
 entity "Device Status" as device_status {
   *id: int <*>
-  device: int
-  status: int
   description: varchar
 }
 
