@@ -19,6 +19,7 @@ Container_Boundary(WarmhouseSystem, "Warmhouse System") {
 
   Container(DeviceManagementService, "Device Management Service", ".Net", "Manage equipment items")
 
+  Container(DeviceCommandService, "Device Command Service", ".Net", "Process devices by sending commands")
   Container(TelemetryService, "Telemetry Service", ".Net", "Store telemetry data")
   Container(StoreService, "ELK", "Elasticsearch + Logstash + Kibana", "Store and index logs and telemetry")
 
@@ -35,6 +36,7 @@ Rel(WebFrontApp, LoadBalancer,"Balance load")
 Rel(LoadBalancer, WebApp,"Manage requests", "HTTPS/JSON")
 Rel(WebApp,UserManagementService,"Authorization and user management")
 Rel(WebApp,DeviceManagementService,"Read/Writes data")
+Rel(WebApp,DeviceCommandService,"Send commands")
 Rel(WebApp,ReportingService,"Read data")
 
 Rel(TelemetryService,StoreService,"Read/Writes data")
@@ -44,6 +46,7 @@ Rel(TelemetryService,device,"Writes data")
 
 Rel(DeviceManagementService,device,"Manage equipment")
 Rel(DeviceManagementService,DeviceManagementDB,"Store data and commands for devices")
+Rel(DeviceCommandService,device,"Sends command")
 
 Rel(WebApp,PaymentService,"Processes payment requests")
 Rel(PaymentService,payment_api,"Processes payments")
