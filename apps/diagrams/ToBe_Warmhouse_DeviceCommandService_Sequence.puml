@@ -1,0 +1,40 @@
+@startuml
+' C4 Code (L4) Sequence диаграмма: обработка одной команды через таймаут (skip-and-continue)
+title C4 Code — Sequence: обработка команды deviceId, skip-and-continue
+
+participant "CommandQueueProcessor" as Q
+participant "CommandDeliveryWorker" as W
+participant "DeviceCommandSender" as S
+participant "MQTT Broker" as B
+participant "CommandResultDispatcher" as R
+participant "CommandStateRepository" as ST
+
+== Команда готова к доставке ==
+
+Q -> W : GetNextCommand(deviceId)
+activate W
+
+W -> ST : MarkExecuting(commandId)
+W -> S : Publish(deviceId, commandId, payload)  [MQTT QoS 1]
+S -> B : publish device/{id}/commands
+    B -> B : store-and-forward (persistent session, for offline devices)
+
+== Параллельно: ожидание answer или таймаут ==
+
+alt Ответ устройства получен
+    B -> R : device/{id}/results{commandId}
+    R -> ST : MarkDone(commandId)
+    R -> Q : ScheduleNext(deviceId) (следующую команду на устройстве можно выполнить только после выполнения предыдущей)
+else Таймаут: ретраи не исчерпаны
+    R -> W : OnElapsed(commandId)
+    W -> S : Publish(deviceId, commandId, payload)  [retry N]
+else Таймаут: ретраи исчерпаны -> skip-and-continue
+    W -> ST : MarkTimedOut(commandId)
+    W -> W : IDeliveryScheduler.SkipAndContinue(deviceId)
+    W -> Q : Process(deviceId) — следующая команда
+    deactivate T
+end
+
+deactivate W
+
+@enduml
