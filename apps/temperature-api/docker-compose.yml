@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  temperature-api:
+    build: .
+    container_name: temperature-api-service
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: unless-stopped
