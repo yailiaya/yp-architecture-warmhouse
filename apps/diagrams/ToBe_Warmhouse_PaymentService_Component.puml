@@ -1,0 +1,28 @@
+@startuml
+title Warmhouse Device Command Component Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(DeviceCommandService, "Device Command Service") {
+  Component(API, "API", "Accepts all requests to process payments")
+  Component(PaymentGatewayIntegration, "Payment Gateway Integration", ".Net", "Integrates with external payment gatewayas.")
+  Component(StatusHandling, "Status Handling", ".Net", "Process payments statuses (success, failure, refund etc)")
+  Component(TransactionLogging, "Transaction Logging", ".Net", "Logs all transactions to ELK system")
+  Component(TransactionReporting, "Transaction Reporting", ".Net", "Process API for accessing data from ELK")
+}
+
+System_Ext(ELK, "ELK", "ELK stack for logging and telementry", "Logs")
+System_Ext(ExternalPaymentSystem, "External Payment System", "Process payment requests", "Process payment requests")
+
+Rel(API,PaymentGatewayIntegration,"Sends payment data to")
+Rel(PaymentGatewayIntegration,StatusHandling,"Processes payment status from")
+Rel(StatusHandling,TransactionLogging,"Logs transactions to")
+Rel(TransactionLogging,TransactionReporting,"Sends transaction data to")
+
+Rel(StatusHandling,ELK,"Logs command status change")
+Rel(TransactionReporting,ELK,"Logs command status change")
+
+Rel(PaymentGatewayIntegration,ExternalPaymentSystem,"Processes payment status from")
+@enduml

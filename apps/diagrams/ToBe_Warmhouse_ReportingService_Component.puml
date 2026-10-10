@@ -1,0 +1,26 @@
+@startuml
+title Warmhouse Reporting Component Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(ReportingService, "Reporting Service") {
+  Component(API, "API", ".Net Web API")
+
+  Component(ReportBuilder, "Report Builder", ".Net", "Creates reports based on incoming filters")
+  Component(LoggingIntegration, "Logging Logging", ".Net", "Request log data")
+  Component(TelemetryIntegration, "Telemetry Logging", ".Net", "Request telemetry Data")
+}
+
+Container(StoreService, "ELK", "Elasticsearch + Logstash + Kibana", "Store and index logs and telemetry")
+
+Rel(API,ReportBuilder,"Validate command")
+Rel(ReportBuilder,LoggingIntegration,"Request data")
+Rel(ReportBuilder,TelemetryIntegration,"Request data")
+
+Rel(LoggingIntegration,StoreService,"Request data")
+Rel(TelemetryIntegration,StoreService,"Request data")
+
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title WarmHouse Context Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "A user of Warmhouse inc.")
+Person(admin, "Admin", "An administrator managing the system")
+System(WarmHouseSystem, "WarmHouse System", "System managing sensors, warmdevices")
+
+System_Ext(device, "Device", "External API for device controller. Heater, sensor etc.")
+System_Ext(paymentsystem, "Payment System", "External API for payments")
+
+Rel(user, WarmHouseSystem, "Uses the system")
+Rel(admin,WarmHouseSystem,"Manages users")
+Rel(user,device,"Setup and Register device in the system")
+Rel(WarmHouseSystem,device,"Calls device controller")
+Rel(WarmHouseSystem,paymentsystem,"Send requests for payments")
+
+@enduml
