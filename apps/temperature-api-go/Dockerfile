@@ -24,7 +24,7 @@ COPY --from=builder /app/temperature-api-go .
 
 USER appuser
 
-EXPOSE 8080
-ENV PORT=:8080
+EXPOSE 8081
+ENV PORT=:8081
 
 CMD ["./temperature-api-go"]

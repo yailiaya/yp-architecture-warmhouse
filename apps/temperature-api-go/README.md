@@ -8,6 +8,8 @@ PostgreSQL database** used by the `smart_home` service. It is a port of the
 - Single external dependency: `github.com/jackc/pgx/v5` (raw SQL, no ORM).
 - Small Alpine-based Docker image.
 - Returns the exact JSON shape of `services.TemperatureResponse`.
+- The `value` field is a random temperature between 15.0 and 30.0 (all other
+  fields are read from the database).
 
 ## Endpoints
 
@@ -38,7 +40,7 @@ Example response body (matches `TemperatureResponse`):
 | Variable       | Default                                                     | Description                          |
 | -------------- | ----------------------------------------------------------- | ------------------------------------ |
 | `DATABASE_URL` | `postgres://postgres:postgres@localhost:5432/smarthome`      | PostgreSQL connection string (URI or key/value) |
-| `PORT`         | `:8080`                                                      | Address/port the HTTP server binds   |
+| `PORT`         | `:8081`                                                      | Address/port the HTTP server binds   |
 
 ## Run with Docker Compose
 
@@ -48,7 +50,7 @@ From the `apps` directory:
 docker compose up --build
 ```
 
-The service listens on container port `8080` and is published on host port `8081`.
+The service listens on container port `8081` and is published on host port `8081`.
 
 ## Run locally
 
