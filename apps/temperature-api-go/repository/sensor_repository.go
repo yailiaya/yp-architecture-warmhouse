@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 	"errors"
+	"math"
+	"math/rand"
 	"strconv"
 	"time"
 
@@ -76,7 +78,8 @@ func (r *SensorRepository) scanOne(ctx context.Context, query string, args ...an
 	}
 
 	return &models.TemperatureResponse{
-		Value:       value,
+		// Random temperature between 15.0 and 30.0, rounded to one decimal place.
+		Value:       math.Round((15.0+rand.Float64()*15.0)*10) / 10,
 		Unit:        unit,
 		Timestamp:   lastUpdated,
 		Location:    location,
